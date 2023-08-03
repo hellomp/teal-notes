@@ -122,24 +122,30 @@ const defaultProps = {
 </script>
 <template>
   <Menu class="w-full border-none pb-0" :model="items" />
-  <el-tree :data="nodes" :props="defaultProps" class="tree-view">
+  <el-tree :data="nodes" :props="defaultProps">
     <template #default="{ node, data }">
       <span class="mr-2">
         <i class="fa-solid fa-folder" v-if="data.type == 'folder'" />
         <i class="fa-solid fa-file" v-else />
       </span>
-      <span class="custom-tree-node">
+      <span>
         <span>{{ node.label }}</span>
       </span>
     </template>
   </el-tree>
 </template>
 
-<style scoped>
-.tree-view {
+<style>
+.el-tree {
   --el-fill-color-blank: var(--surface-a);
   --el-text-color-regular: rgba(255, 255, 255, 0.87);
   --el-tree-node-hover-bg-color: rgba(255, 255, 255, 0.04);
   --el-tree-node-content-height: 2rem;
+  .fa-solid {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .el-tree-node__content:hover .fa-solid {
+    color: rgba(255, 255, 255, 0.87);
+  }
 }
 </style>
