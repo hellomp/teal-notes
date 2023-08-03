@@ -1,10 +1,22 @@
 <script setup>
-import Button from 'primevue/button'
+import Splitter from 'primevue/splitter'
+import SplitterPanel from 'primevue/splitterpanel'
+
+import AppHeader from '../components/AppHeader.vue'
+import AppSideBar from '../components/AppSideBar.vue'
+import AppMain from '../components/AppMain.vue'
 </script>
 
 <template>
-  <main>
-    <h1><font-awesome-icon icon="fa-solid fa-folder" /> Hello World</h1>
-    <Button label="Submit" />
-  </main>
+  <div>
+    <AppHeader />
+    <Splitter class="mb-5">
+      <SplitterPanel :size="15">
+        <AppSideBar />
+      </SplitterPanel>
+      <SplitterPanel :size="85">
+        <AppMain />
+      </SplitterPanel>
+    </Splitter>
+  </div>
 </template>

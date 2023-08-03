@@ -1,4 +1,7 @@
+@import '/node_modules/primeflex/primeflex.css';
 @import './primevue-theme.css';
+@import '@fortawesome/fontawesome-free/css/fontawesome.css';
+@import '@fortawesome/fontawesome-free/css/solid.css';
 
 body {
   font-family: var(--font-family);

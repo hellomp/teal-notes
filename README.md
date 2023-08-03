@@ -1,6 +1,6 @@
-# teal-notes
+# Teal Notes
 
-This template should help get you started developing with Vue 3 in Vite.
+A personal web app for note taking and task management.
 
 ## Recommended IDE Setup
 
