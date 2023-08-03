@@ -10,7 +10,7 @@ import AppMain from '../components/AppMain.vue'
 <template>
   <div>
     <AppHeader />
-    <Splitter class="mb-5">
+    <Splitter class="main-view">
       <SplitterPanel :size="15">
         <AppSideBar />
       </SplitterPanel>
@@ -20,3 +20,9 @@ import AppMain from '../components/AppMain.vue'
     </Splitter>
   </div>
 </template>
+
+<style scoped>
+.main-view {
+  height: calc(100vh - 72px);
+}
+</style>
