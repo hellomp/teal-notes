@@ -1,128 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { config } from '../libs/config'
 import Menu from 'primevue/menu'
 import 'element-plus/es/components/tree/style/css'
 import { ElTree } from 'element-plus'
-const items = ref([
-  {
-    label: 'Main',
-    items: [
-      {
-        label: 'All Notes',
-        icon: 'fa-solid fa-file'
-      },
-      {
-        label: 'Tasks',
-        icon: 'fa-solid fa-square-check'
-      },
-      {
-        label: 'Images',
-        icon: 'fa-solid fa-image'
-      }
-    ]
-  },
-  {
-    label: 'Favorites',
-    items: [
-      {
-        label: 'Work',
-        icon: 'fa-solid fa-file'
-      },
-      {
-        label: 'Personal',
-        icon: 'fa-solid fa-file'
-      }
-    ]
-  },
-  {
-    label: 'Folders',
-    items: []
-  }
-])
+import { useNotesStore } from '@/stores/notes'
 
-const nodes = ref([
-  {
-    key: '0',
-    label: 'Work',
-    icon: 'folder',
-    type: 'folder',
-    children: [
-      {
-        key: '0-0',
-        label: 'What is Vue.js?',
-        icon: 'file',
-        type: 'file'
-      },
-      {
-        key: '0-1',
-        label: 'Quick Start',
-        icon: 'file',
-        type: 'file'
-      },
-      {
-        key: '0-2',
-        label: 'Creating a Vue Application',
-        icon: 'file',
-        type: 'file'
-      },
-      {
-        key: '0-3',
-        label: 'Conditionals Rendering',
-        icon: 'file',
-        type: 'file'
-      }
-    ]
-  },
-  {
-    key: '1',
-    label: 'Personal',
-    icon: 'folder',
-    type: 'folder',
-    children: [
-      {
-        key: '1-0',
-        label: 'Sales',
-        type: 'folder',
-        children: [
-          {
-            key: '1-0-0',
-            label: 'Props',
-            type: 'file'
-          },
-          {
-            key: '1-0-1',
-            label: 'Stores',
-            type: 'file'
-          }
-        ]
-      },
-      {
-        key: '1-1',
-        label: 'Props',
-        type: 'file'
-      },
-      {
-        key: '1-2',
-        label: 'Components Events',
-        type: 'file'
-      },
-      {
-        key: '1-3',
-        label: 'Slots',
-        type: 'file'
-      }
-    ]
-  }
-])
-
-const defaultProps = {
-  children: 'children',
-  label: 'label'
-}
+const store = useNotesStore()
 </script>
 <template>
-  <Menu class="w-full border-none pb-0" :model="items" />
-  <el-tree :data="nodes" :props="defaultProps">
+  <Menu class="w-full border-none pb-0" :model="config.menuItems" />
+  <el-tree :data="store.notesTree" :props="config.defaultTreeProps">
     <template #default="{ node, data }">
       <span class="mr-2">
         <i class="fa-solid fa-folder" v-if="data.type == 'folder'" />
