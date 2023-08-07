@@ -1,12 +1,17 @@
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { folders, files } from '../libs/supabase'
+import { getFolders, getNotes } from '../libs/supabase'
 import { buildTree, combineArrays } from '../libs/helpers'
 
 export const useNotesStore = defineStore('notes', () => {
-  const notesTree = computed(() => {
-    return buildTree(combineArrays(folders, files))
-  })
+  const folders = ref([])
+  const notes = ref([])
+  const notesTree = computed(() => buildTree(combineArrays(folders.value, notes.value)))
 
-  return { notesTree }
+  async function getDatafromServer() {
+    folders.value = await getFolders()
+    notes.value = await getNotes()
+  }
+
+  return { folders, notes, notesTree, getDatafromServer }
 })
