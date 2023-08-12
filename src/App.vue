@@ -6,7 +6,7 @@ import { useNotesStore } from '@/stores/notes'
 const store = useNotesStore()
 
 onMounted(() => {
-  store.getDatafromServer()
+  store.getNotesFromServer()
 })
 </script>
 <template>

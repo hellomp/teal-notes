@@ -6,10 +6,23 @@ import { ElTree } from 'element-plus'
 import { useNotesStore } from '@/stores/notes'
 
 const store = useNotesStore()
+
+const nodeTreeClick = (data) => {
+  if (data.type == 'file') {
+    if (!checkIfAlreadyOpened(store.tabs, data.id)) {
+      store.getNoteFromServer(data.id)
+      store.setActiveTab()
+    }
+  }
+}
+
+const checkIfAlreadyOpened = (array, propertyValue) => {
+  return array.some((item) => item.id === propertyValue)
+}
 </script>
 <template>
   <Menu class="w-full border-none pb-0" :model="config.menuItems" />
-  <el-tree :data="store.notesTree" :props="config.defaultTreeProps">
+  <el-tree :data="store.notesTree" :props="config.defaultTreeProps" @node-click="nodeTreeClick">
     <template #default="{ node, data }">
       <span class="mr-2">
         <i class="fa-solid fa-folder" v-if="data.type == 'folder'" />

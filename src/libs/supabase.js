@@ -16,7 +16,7 @@ const getFolders = async () => {
 
 const getNotes = async () => {
   try {
-    const { data: folders, error } = await supabase.from('folders').select('id,name,parent')
+    const { data: folders, error } = await supabase.from('files').select('id,name,parent')
     if (error) throw error
     return folders
   } catch (error) {
@@ -24,12 +24,17 @@ const getNotes = async () => {
   }
 }
 
-/* const { data: foldersPromise, foldersError } = await supabase
-  .from('folders')
-  .select('id,name,parent')
-const { data: filesPromise, filesError } = await supabase.from('files').select('id,name,parent')
+const getNote = async (id) => {
+  try {
+    const { data: note, error } = await supabase
+      .from('files')
+      .select('id,name,content')
+      .eq('id', id)
+    if (error) throw error
+    return note[0]
+  } catch (error) {
+    console.error(error)
+  }
+}
 
-const folders = await foldersPromise
-const files = await filesPromise */
-
-export { getFolders, getNotes }
+export { getFolders, getNotes, getNote }
